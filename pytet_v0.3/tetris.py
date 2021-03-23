@@ -65,7 +65,7 @@ class Tetris():
                 self.deleteFullLines()
             self.iScreen = Matrix(self.oScreen)
             self.top = 0
-            self.left = Tetris.iScreenDw + self.iScreenDx//2 - 2
+            self.left = Tetris.iScreenDw + self.iScreenDx//2 - Tetris.iScreenDw//2
             self.idxBlockType = int(key)
             self.idxBlockDegree = 0
             self.currBlk = Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree]
@@ -88,7 +88,7 @@ class Tetris():
         elif key == 's': # move down
             self.top += 1
         elif key == 'w': # rotate the block clockwise
-            self.idxBlockDegree = (self.idxBlockDegree + 1) % 4
+            self.idxBlockDegree = (self.idxBlockDegree + 1) % Tetris.nBlockDegrees
             self.currBlk = Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree]
         elif key == ' ': # drop the block
             while not self.tempBlk.anyGreaterThan(1):
@@ -110,7 +110,7 @@ class Tetris():
                 self.top -= 1
                 self.state = TetrisState.NewBlock
             elif key == 'w': # undo: rotate the block counter-clockwise
-                self.idxBlockDegree = (self.idxBlockDegree - 1) % 4
+                self.idxBlockDegree = (self.idxBlockDegree - 1) % Tetris.nBlockDegrees
                 self.currBlk = Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree]
             elif key == ' ': # undo: move up
                 self.top -= 1
